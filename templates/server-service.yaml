@@ -28,6 +28,9 @@ spec:
     - name: http
       port: 8500
       targetPort: 8500
+    - name: https
+      port: 8443
+      targetPort: 8443
     - name: serflan-tcp
       protocol: "TCP"
       port: 8301

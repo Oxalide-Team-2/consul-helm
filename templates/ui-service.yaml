@@ -14,15 +14,19 @@ metadata:
     chart: {{ template "consul.chart" . }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
+{{- if .Values.ui.service.annotations }}
+  annotations:
+{{ toYaml .Values.ui.service.annotations | indent 4 }}
+{{- end }}
 spec:
   selector:
     app: {{ template "consul.name" . }}
     release: "{{ .Release.Name }}"
     component: server
   ports:
-    - name: http
-      port: 80
-      targetPort: 8500
+    - name: https
+      port: 443
+      targetPort: 8443
   {{- if .Values.ui.service.type }}
   type: {{ .Values.ui.service.type }}
   {{- end }}
